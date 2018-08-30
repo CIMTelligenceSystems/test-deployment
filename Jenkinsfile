@@ -66,7 +66,7 @@ sh 'kubectl apply -f deploy/ --namespace=myapp-production'
          println("Waiting for IP address")
          while(ip=='' && count<countLimit) {
           sleep 30
-          ip = sh script: 'kubectl get svc --namespace=myapp-production -o jsonpath="{.items[?(@.metadata.name==\'nginx-reverseproxy-service\')].status.loadBalancer.ingress[*].ip}"', returnStdout: true
+          ip = sh script: 'kubectl get svc --namespace=myapp-production -o=jsonpath="{.items[?(@.metadata.name==\'nginx-reverseproxy-service\')].status.loadBalancer.ingress[*].ip}"', returnStdout: true
           ip = ip.trim()
           count++
      }
